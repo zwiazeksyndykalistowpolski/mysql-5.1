@@ -33,10 +33,7 @@ ENV PATH $PATH:/usr/local/mysql/bin:/usr/local/mysql/scripts
 
 WORKDIR /usr/local/mysql
 
-# Fix unknown variable error:
-RUN sed -i 's/lc-messages-dir/# lc-messages-dir/' /etc/mysql/my.cnf
-
-# VOLUME /var/lib/mysql
+VOLUME /var/lib/mysql
 
 COPY docker-entrypoint.sh /entrypoint.sh
 
