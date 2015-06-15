@@ -25,7 +25,9 @@ RUN curl -SL "http://dev.mysql.com/get/Downloads/MySQL-5.1/mysql-5.1.73-linux-x8
     find /usr/local/mysql -type f -name "*.a" -delete && \
     { find /usr/local/mysql -type f -executable -exec strip --strip-all '{}' + || true; } && \
     apt-get purge -y --auto-remove binutils && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    mkdir /usr/share/english && \
+    ln -s /usr/local/mysql/share/english/errmsg.sys /usr/share/english/errmsg.sys
 
 ENV PATH $PATH:/usr/local/mysql/bin:/usr/local/mysql/scripts
 
