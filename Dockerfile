@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM goodguide/base
 
 RUN groupadd -r mysql && useradd -r -g mysql mysql
 
