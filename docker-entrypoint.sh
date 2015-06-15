@@ -39,4 +39,5 @@ if [ ! -d '/var/lib/mysql/mysql' -a "${1%_safe}" = 'mysqld' ]; then
 fi
 
 chown -R mysql:mysql /var/lib/mysql
+echo >&2 "$@"
 exec "$@"
