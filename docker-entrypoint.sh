@@ -36,6 +36,15 @@ if [ ! -d '/var/lib/mysql/mysql' -a "${1%_safe}" = 'mysqld' ]; then
 	echo 'FLUSH PRIVILEGES ;' >> "$TEMP_FILE"
 	
 	set -- "$@" --init-file="$TEMP_FILE"
+	
+	for f in /docker-entrypoint-initdb.d/*; do
+		case "$f" in
+			*.sh)  echo "$0: running $f"; . "$f" ;;
+			*.sql) echo "$0: running $f"; "${mysql[@]}" < "$f" && echo ;;
+			*)     echo "$0: ignoring $f" ;;
+		esac
+		echo
+	done
 fi
 
 chown -R mysql:mysql /var/lib/mysql
