@@ -24,7 +24,7 @@ if [ "$1" = 'mysqld' ]; then
 		mysql_install_db --user=root --datadir="$DATADIR"
 		echo 'Database initialized'
 
-		mysqld --user=mysql --datadir="$DATADIR" --skip-networking &
+		mysqld --user=root --datadir="$DATADIR" --skip-networking &
 		pid="$!"
 
 		mysql=( mysql --protocol=socket -uroot )
