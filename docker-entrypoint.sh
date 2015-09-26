@@ -16,7 +16,7 @@ if [ "$1" = 'mysqld' ]; then
 			echo >&2 '  Did you forget to add -e MYSQL_ROOT_PASSWORD=... ?'
 			exit 1
 		fi
-
+		echo "DATAIR: $DATADIR"
 		mkdir -p "$DATADIR"
 		chown -R mysql:mysql "$DATADIR"
 
