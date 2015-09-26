@@ -21,7 +21,7 @@ if [ "$1" = 'mysqld' ]; then
 		chown -R mysql:mysql "$DATADIR"
 
 		echo 'Initializing database'
-		mysqld --initialize-insecure=on --datadir="$DATADIR"
+		mysql_install_db --user=root --datadir="$DATADIR"
 		echo 'Database initialized'
 
 		mysqld --user=mysql --datadir="$DATADIR" --skip-networking &
