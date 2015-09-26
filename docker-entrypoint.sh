@@ -23,8 +23,8 @@ if [ "$1" = 'mysqld' ]; then
 		echo 'Initializing database'
 		mysql_install_db --user=root --datadir="$DATADIR"
 		echo 'Database initialized'
-
-		mysqld --user=root --datadir="$DATADIR" --skip-networking &
+		chown -R mysql:mysql "$DATADIR"
+		mysqld --user=mysql --datadir="$DATADIR" --skip-networking &
 		pid="$!"
 
 		mysql=( mysql --protocol=socket -uroot )
@@ -97,4 +97,4 @@ if [ "$1" = 'mysqld' ]; then
 	chown -R mysql:mysql "$DATADIR"
 fi
 
-exec "$@ --user=root"
+exec "$@"
