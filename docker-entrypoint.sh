@@ -1,16 +1,10 @@
 #!/bin/bash
 set -e
 
-# if command starts with an option, prepend mysqld
-if [ "${1:0:1}" = '-' ]; then
-	set -- mysqld "$@"
-fi
-
-if [ "$1" = 'mysqld' ]; then
 	# Get config
 	DATADIR="/var/lib/mysql"
 
-	if [ ! -d "$DATADIR" ]; then
+	if [ ! -f "/var/lib/mysql/ibdata1" ]; then
 		if [ -z "$MYSQL_ROOT_PASSWORD" -a -z "$MYSQL_ALLOW_EMPTY_PASSWORD" ]; then
 			echo >&2 'error: database is uninitialized and MYSQL_ROOT_PASSWORD not set'
 			echo >&2 '  Did you forget to add -e MYSQL_ROOT_PASSWORD=... ?'
@@ -95,6 +89,5 @@ if [ "$1" = 'mysqld' ]; then
 	fi
 
 	chown -R mysql:mysql "$DATADIR"
-fi
 
 exec "$@"
